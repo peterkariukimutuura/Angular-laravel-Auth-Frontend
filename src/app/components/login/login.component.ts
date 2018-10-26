@@ -12,11 +12,14 @@ export class LoginComponent implements OnInit {
   	email:null,
   	password:null
   }
+
+  public url ="http://127.0.0.1:8000/";
+
   constructor(private http:HttpClient) { }
 
   onSubmit(){
   	console.log(this.form);
-  	return this.http.post('url',this.form)
+  	return this.http.post(this.url + 'api/auth/login',this.form)
   		.subscribe(
 	  		data=>console.log(data),
 	  		error=>console.log(error)
