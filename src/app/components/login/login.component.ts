@@ -14,17 +14,22 @@ export class LoginComponent implements OnInit {
   }
 
   public url ="http://127.0.0.1:8000/";
+  public error =null;
 
   constructor(private http:HttpClient) { }
 
   onSubmit(){
   	console.log(this.form);
-  	return this.http.post(this.url + 'api/auth/login',this.form)
+  	return this.http.post(this.url + 'api/login',this.form)
   		.subscribe(
 	  		data=>console.log(data),
-	  		error=>console.log(error)
+	  		error=>this.handleError(error)
   		);
 
+  }
+
+  handleError(error){
+  	this.error=error.error.error;
   }
 
   ngOnInit() {
