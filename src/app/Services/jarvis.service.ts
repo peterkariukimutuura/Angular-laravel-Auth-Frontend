@@ -6,15 +6,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class JarvisService {
 
-	public url ="http://127.0.0.1:8000/";
+	private base_url ="http://127.0.0.1:8000/api";
 
   constructor(private http:HttpClient) { }
 
   signup(data){
-  	return this.http.post(this.url + 'api/signup',data);
+  	return this.http.post(this.base_url + '/signup',data);
   }
 
   login(data){
-  	return this.http.post(this.url + 'api/login',data);
+  	return this.http.post(this.base_url + '/login',data); 
   }
 }
