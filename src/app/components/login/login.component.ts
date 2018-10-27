@@ -36,7 +36,9 @@ export class LoginComponent implements OnInit {
 
   HandleResponse(data){
     this.token.handle(data.access_token);
-    console.log(data);
+    if (this.token.isValid()) {
+      this.error=null;
+    }
   }
 
   ngOnInit() {
