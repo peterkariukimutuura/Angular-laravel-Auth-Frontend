@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JarvisService } from './../../services/jarvis.service';
+import { TokenService } from './../../services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -15,12 +16,15 @@ export class LoginComponent implements OnInit {
 
   public error =null;
 
-  constructor(private jarvis:JarvisService) { }
+  constructor(
+    private jarvis:JarvisService,
+    private token:TokenService
+    ) { }
 
   onSubmit(){
   	return this.jarvis.login(this.form)
   		.subscribe(
-	  		data=>console.log(data),
+	  		data=>this.HandleResponse(data),
 	  		error=>this.handleError(error)
   		);
 
@@ -28,6 +32,11 @@ export class LoginComponent implements OnInit {
 
   handleError(error){
   	this.error=error.error.error;
+  }
+
+  HandleResponse(data){
+    this.token.handle(data.access_token);
+    console.log(data);
   }
 
   ngOnInit() {
