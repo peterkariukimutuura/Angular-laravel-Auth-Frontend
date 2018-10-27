@@ -45,7 +45,6 @@ export class TokenService {
 
   decode(payload){
   	return JSON.parse(atob(payload));
-
   }
 
   loggedIn(){

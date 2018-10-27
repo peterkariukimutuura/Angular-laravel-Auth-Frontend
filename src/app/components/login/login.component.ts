@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JarvisService } from './../../services/jarvis.service';
 import { TokenService } from './../../services/token.service';
+import { AuthServiceService } from './../../services/auth-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,9 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private jarvis:JarvisService,
-    private token:TokenService
+    private token:TokenService,
+    private Auth :AuthServiceService,
+    private router : Router
     ) { }
 
   onSubmit(){
@@ -38,6 +42,8 @@ export class LoginComponent implements OnInit {
     this.token.handle(data.access_token);
     if (this.token.isValid()) {
       this.error=null;
+      this.Auth.changeAuthStatus(true);
+      this.router.navigateByUrl('/profile');
     }
   }
 
