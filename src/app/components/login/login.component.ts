@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { JarvisService } from './../../services/jarvis.service';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +13,12 @@ export class LoginComponent implements OnInit {
   	password:null
   }
 
-  public url ="http://127.0.0.1:8000/";
   public error =null;
 
-  constructor(private http:HttpClient) { }
+  constructor(private jarvis:JarvisService) { }
 
   onSubmit(){
-  	console.log(this.form);
-  	return this.http.post(this.url + 'api/login',this.form)
+  	return this.jarvis.login(this.form)
   		.subscribe(
 	  		data=>console.log(data),
 	  		error=>this.handleError(error)

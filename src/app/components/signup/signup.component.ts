@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { JarvisService } from './../../services/jarvis.service';
 
 @Component({
   selector: 'app-signup',
@@ -15,15 +15,15 @@ export class SignupComponent implements OnInit {
 		password_confirmation:null
 	}
 
-  public url ="http://127.0.0.1:8000/";
+  
   public error =[];
 
-  constructor(private http:HttpClient) { }
+  constructor(private jarvis:JarvisService) { }
 
   ngOnInit() {
   }
   onSubmit(){
-  	return this.http.post(this.url + 'api/signup',this.form)
+  	return this.jarvis.signup(this.form)
   		.subscribe(
 	  		data=>console.log(data),
 	  		error=>this.handleError(error)
